@@ -11,6 +11,8 @@ classes (incidente, incidente grave, acidente) com Regressão Logística multino
 | `figuras_eda.py` | Análise exploratória em três classes: gera Figuras 1 e 2 e as Tabelas 2 a 5 (`.tex`) |
 | `modelos_sipaer.py` | Modelagem: LR e RF × 4 estratégias de balanceamento, validação cruzada, teste, Figuras 3 a 5, Tabelas 6 e 7 |
 | `eda_sipaer.py` | Versão anterior da EDA (alvo binário, saída em `.docx`); mantida como histórico |
+| `gerar_slides.py` | Slides da apresentação em vídeo (17 slides, 16:9), lidos das tabelas `.tex` e figuras do artigo; notas com roteiro e tempo-alvo |
+| `apresentacao/slides_relatorio_parcial.pptx` | Deck gerado |
 | `artigo/artigo.tex` | Artigo (relatório parcial), com tabelas via `\input{tabelas/...}` |
 | `artigo/artigo_overleaf.tex` | Mesmo artigo com as tabelas embutidas, para colar no Overleaf |
 | `artigo/figuras/` | PNGs das figuras |
@@ -25,6 +27,7 @@ python3 -m venv venv && source venv/bin/activate
 pip install pandas==2.2.3 openpyxl==3.1.5 matplotlib==3.9.2 scikit-learn==1.5.2 imbalanced-learn==0.12.4
 python figuras_eda.py BASE_SIPAER.xlsx      # ~5 s
 python modelos_sipaer.py BASE_SIPAER.xlsx   # ~80 s (busca em grade com n_jobs=-1)
+python3 gerar_slides.py                     # requer python-pptx
 cd artigo && tectonic -X compile artigo.tex # ou compile no Overleaf (pdfLaTeX)
 ```
 
