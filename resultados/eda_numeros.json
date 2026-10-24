@@ -1,0 +1,314 @@
+{
+ "n": 5038,
+ "ini": "10/05/2016",
+ "fim": "09/05/2026",
+ "colunas": 43,
+ "multi": 46,
+ "n_ac": 91,
+ "n_ig": 102,
+ "n_inc": 4845,
+ "pct_ac": "1,81",
+ "pct_ig": "2,0",
+ "pct_inc": "96,2",
+ "fatais": 17,
+ "mortes": 122,
+ "mortes_max": 62,
+ "fatalidades_ig": 0,
+ "nulos_assentos": "10,2",
+ "nulos_ano_fab": "14,2",
+ "fat_acid_n": 56,
+ "fat_acid_oper": 54,
+ "fat_acid_hum": 46,
+ "fat_acid_mat": 1,
+ "top_fat": {
+  "PROCESSO DECISÓRIO": 25,
+  "JULGAMENTO DE PILOTAGEM": 24,
+  "SUPERVISÃO GERENCIAL": 20
+ },
+ "fat_ig_n": 45,
+ "top_fat_ig": {
+  "PERCEPÇÃO": 20,
+  "ATENÇÃO": 19,
+  "ATITUDE": 19
+ },
+ "op": {
+  "REGULAR": {
+   "n": 4302,
+   "ig": 43,
+   "ac": 12,
+   "tx_ig": 1.0,
+   "tx_ac": 0.28
+  },
+  "NÃO REGULAR": {
+   "n": 88,
+   "ig": 9,
+   "ac": 7,
+   "tx_ig": 10.23,
+   "tx_ac": 7.95
+  },
+  "TÁXI AÉREO": {
+   "n": 648,
+   "ig": 50,
+   "ac": 72,
+   "tx_ig": 7.72,
+   "tx_ac": 11.11
+  }
+ },
+ "mot": {
+  "JATO": {
+   "n": 3702,
+   "ig": 43,
+   "ac": 12,
+   "tx_ig": 1.16,
+   "tx_ac": 0.32
+  },
+  "TURBOÉLICE": {
+   "n": 775,
+   "ig": 19,
+   "ac": 17,
+   "tx_ig": 2.45,
+   "tx_ac": 2.19
+  },
+  "TURBOEIXO": {
+   "n": 352,
+   "ig": 10,
+   "ac": 17,
+   "tx_ig": 2.84,
+   "tx_ac": 4.83
+  },
+  "PISTÃO": {
+   "n": 199,
+   "ig": 29,
+   "ac": 45,
+   "tx_ig": 14.57,
+   "tx_ac": 22.61
+  }
+ },
+ "eqp": {
+  "AVIÃO": {
+   "n": 4610,
+   "ig": 91,
+   "ac": 62,
+   "tx_ig": 1.97,
+   "tx_ac": 1.34
+  },
+  "HELICÓPTERO": {
+   "n": 375,
+   "ig": 11,
+   "ac": 28,
+   "tx_ig": 2.93,
+   "tx_ac": 7.47
+  }
+ },
+ "qtd": {
+  "BIMOTOR": {
+   "n": 4657,
+   "ig": 72,
+   "ac": 42,
+   "tx_ig": 1.55,
+   "tx_ac": 0.9
+  },
+  "MONOMOTOR": {
+   "n": 308,
+   "ig": 28,
+   "ac": 49,
+   "tx_ig": 9.09,
+   "tx_ac": 15.91
+  }
+ },
+ "fase": {
+  "SOLO": {
+   "n": 547,
+   "ig": 6,
+   "ac": 0,
+   "tx_ig": 1.1,
+   "tx_ac": 0.0
+  },
+  "DECOLAGEM E SUBIDA": {
+   "n": 1651,
+   "ig": 16,
+   "ac": 19,
+   "tx_ig": 0.97,
+   "tx_ac": 1.15
+  },
+  "CRUZEIRO E DESCIDA": {
+   "n": 1027,
+   "ig": 14,
+   "ac": 28,
+   "tx_ig": 1.36,
+   "tx_ac": 2.73
+  },
+  "APROXIMAÇÃO E POUSO": {
+   "n": 1770,
+   "ig": 66,
+   "ac": 42,
+   "tx_ig": 3.73,
+   "tx_ac": 2.37
+  }
+ },
+ "reg": {
+  "NORTE": {
+   "n": 530,
+   "ig": 32,
+   "ac": 44,
+   "tx_ig": 6.04,
+   "tx_ac": 8.3
+  },
+  "CENTRO-OESTE": {
+   "n": 501,
+   "ig": 11,
+   "ac": 9,
+   "tx_ig": 2.2,
+   "tx_ac": 1.8
+  },
+  "NORDESTE": {
+   "n": 783,
+   "ig": 17,
+   "ac": 9,
+   "tx_ig": 2.17,
+   "tx_ac": 1.15
+  },
+  "SUL": {
+   "n": 651,
+   "ig": 11,
+   "ac": 7,
+   "tx_ig": 1.69,
+   "tx_ac": 1.08
+  },
+  "SUDESTE": {
+   "n": 2564,
+   "ig": 29,
+   "ac": 21,
+   "tx_ig": 1.13,
+   "tx_ac": 0.82
+  }
+ },
+ "loc": {
+  "DEMAIS AERÓDROMOS": {
+   "n": 282,
+   "ig": 30,
+   "ac": 28,
+   "tx_ig": 10.64,
+   "tx_ac": 9.93
+  },
+  "FORA DE AERÓDROMO": {
+   "n": 575,
+   "ig": 15,
+   "ac": 49,
+   "tx_ig": 2.61,
+   "tx_ac": 8.52
+  },
+  "AERÓDROMOS SB": {
+   "n": 4181,
+   "ig": 57,
+   "ac": 14,
+   "tx_ig": 1.36,
+   "tx_ac": 0.33
+  }
+ },
+ "cat": {
+  "FALHA TÉCNICA": {
+   "n": 2512,
+   "ig": 29,
+   "ac": 34,
+   "tx_ig": 1.15,
+   "tx_ac": 1.35
+  },
+  "COLISÃO COM FAUNA": {
+   "n": 1767,
+   "ig": 0,
+   "ac": 1,
+   "tx_ig": 0.0,
+   "tx_ac": 0.06
+  },
+  "PISTA, POUSO E SOLO": {
+   "n": 323,
+   "ig": 41,
+   "ac": 32,
+   "tx_ig": 12.69,
+   "tx_ac": 9.91
+  },
+  "TRÁFEGO AÉREO": {
+   "n": 193,
+   "ig": 21,
+   "ac": 0,
+   "tx_ig": 10.88,
+   "tx_ac": 0.0
+  },
+  "METEOROLOGIA": {
+   "n": 94,
+   "ig": 1,
+   "ac": 3,
+   "tx_ig": 1.06,
+   "tx_ac": 3.19
+  },
+  "PERDA DE CONTROLE OU COLISÃO EM VOO": {
+   "n": 20,
+   "ig": 5,
+   "ac": 12,
+   "tx_ig": 25.0,
+   "tx_ac": 60.0
+  },
+  "OUTROS": {
+   "n": 129,
+   "ig": 5,
+   "ac": 9,
+   "tx_ig": 3.88,
+   "tx_ac": 6.98
+  }
+ },
+ "fab_ab": {
+  "n": 2897,
+  "ig": 30,
+  "ac": 8
+ },
+ "fab_cr": {
+  "n": 239,
+  "ig": 19,
+  "ac": 32
+ },
+ "idade_mediana": {
+  "INCIDENTE": 11.0,
+  "INCIDENTE GRAVE": 16.0,
+  "ACIDENTE": 32.0
+ },
+ "pmd_mediano": {
+  "INCIDENTE": 70533.0,
+  "INCIDENTE GRAVE": 7303.0,
+  "ACIDENTE": 2155.0
+ },
+ "taxi_pistao": 153,
+ "pistao": 199,
+ "taxi_heli": 266,
+ "heli": 375,
+ "tipos_unicos": 65,
+ "multi_tipo": 80,
+ "motor_voo": {
+  "n": 122,
+  "ac": 14,
+  "ig": 0
+ },
+ "excursao": {
+  "n": 62,
+  "ac": 20,
+  "ig": 25
+ },
+ "pre": {
+  "n": 1097,
+  "ig": 64,
+  "ac": 65
+ },
+ "pos": {
+  "n": 3941,
+  "ig": 38,
+  "ac": 26
+ },
+ "pico_2024": 1582,
+ "fauna_23_24": 1462,
+ "taxi_2025": 188,
+ "taxi_2026": 8,
+ "norte_taxi_pct": "35",
+ "taxi_pct": "13",
+ "n_aerodromos": 203,
+ "n_cidades": 241
+}

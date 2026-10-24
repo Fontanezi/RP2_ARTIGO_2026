@@ -1,0 +1,17 @@
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Modelo} & \textbf{Sens. AC} & \textbf{Prec. AC} & \textbf{Sens. IG} & \textbf{Prec. IG} & \textbf{Sens. INC} & \textbf{F1-macro} & \textbf{Acur. bal.} & \textbf{AUC AC} \\
+\midrule
+\multicolumn{9}{l}{\textit{Validação cruzada no treino (73 acidentes, 81 incidentes graves)}} \\
+Classe majoritária & 0,0 & 0,0 & 0,0 & 0,0 & 100,0 & 0,327 & 0,333 & -- \\
+Regra pelo tipo de operação & 86,3 & 10,7 & 0,0 & 0,0 & 87,7 & 0,373 & 0,580 & -- \\
+Regressão Logística (Nenhum) & 37,0 & 46,6 & 21,0 & 48,6 & 99,3 & 0,563 & 0,524 & 0,944 \\
+Random Forest (SMOTENC) & 60,3 & 45,8 & 43,2 & 33,0 & 97,2 & 0,624 & 0,669 & 0,945 \\
+\midrule
+\multicolumn{9}{l}{\textit{Teste (18 acidentes, 21 incidentes graves)}} \\
+Classe majoritária & 0,0 & 0,0 & 0,0 & 0,0 & 100,0 & 0,327 & 0,333 & -- \\
+Regra pelo tipo de operação & 88,9 & 10,8 & 0,0 & 0,0 & 87,4 & 0,373 & 0,588 & -- \\
+Regressão Logística (Nenhum) & 55,6 & 55,6 & 9,5 & 25,0 & 99,4 & 0,560 & 0,548 & 0,981 \\
+Random Forest (SMOTENC) & 61,1 & 45,8 & 38,1 & 28,6 & 97,1 & 0,609 & 0,654 & 0,973 \\
+\bottomrule
+\end{tabular}
