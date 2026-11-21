@@ -12,8 +12,9 @@ Relatório final em `artigo/artigo.pdf`; o relatório parcial (out/2026) está n
 | `figuras_eda.py` | Análise exploratória em três classes: figuras anuais/geográficas e tabelas descritivas (`.tex`) |
 | `modelos_sipaer.py` | Modelagem: LR e RF × 4 balanceamentos; ablação de atributos (calendário, descrição do evento, codificação pelo alvo); CV repetida 10×5; validação temporal (≤2022 → ≥2023); limiar para sensibilidade ≥ 80%; calibração (Brier, confiabilidade); figuras e tabelas do artigo |
 | `eda_sipaer.py` | Versão anterior da EDA (alvo binário, saída em `.docx`); mantida como histórico |
-| `gerar_slides.py` | Slides da apresentação em vídeo (17 slides, 16:9), lidos das tabelas `.tex` e figuras do artigo; notas com roteiro e tempo-alvo |
-| `apresentacao/slides_relatorio_parcial.pptx` | Deck do relatório parcial (números da versão de outubro) |
+| `gerar_slides.py` | Slides da apresentação final (19 slides, 16:9), lidos das tabelas `.tex` e figuras do artigo; notas com roteiro e tempo-alvo (9:40, resultados 5:15) |
+| `apresentacao/slides_relatorio_final.pptx` | Deck do relatório final |
+| `apresentacao/slides_relatorio_parcial.pptx` | Deck do relatório parcial (outubro; números da versão anterior, mantido como histórico) |
 | `artigo/artigo.tex` | Artigo (relatório parcial), com tabelas via `\input{tabelas/...}` |
 | `artigo/artigo_overleaf.tex` | Mesmo artigo com as tabelas embutidas, para colar no Overleaf |
 | `artigo/figuras/` | PNGs das figuras |
