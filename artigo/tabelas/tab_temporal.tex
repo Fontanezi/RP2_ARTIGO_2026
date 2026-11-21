@@ -1,0 +1,10 @@
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Modelo} & \textbf{Sens. AC} & \textbf{Prec. AC} & \textbf{Sens. IG} & \textbf{Prec. IG} & \textbf{F1-macro} & \textbf{AUC AC} \\
+\midrule
+\multicolumn{7}{l}{\textit{Treino 2016--2022 (1.097 ocorrências: 65 acidentes e 64 incidentes graves); teste 2023--2026 (3.941 ocorrências: 26 e 38)}} \\
+Regra pelo tipo de operação & 88,5 & 5,8 & 0,0 & 0,0 & 0,353 & -- \\
+Regressão Logística (Nenhum) & 46,2 & 30,8 & 26,3 & 23,8 & 0,536 & 0,974 \\
+Random Forest (SMOTENC) & 50,0 & 20,6 & 63,2 & 11,7 & 0,486 & 0,954 \\
+\bottomrule
+\end{tabular}

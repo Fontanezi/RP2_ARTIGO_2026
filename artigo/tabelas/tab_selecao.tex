@@ -1,0 +1,27 @@
+\begin{tabular}{llcccccc}
+\toprule
+\textbf{Modelo} & \textbf{Configuração} & \textbf{F1-macro CV} & \textbf{Sens. AC} & \textbf{Prec. AC} & \textbf{Sens. IG} & \textbf{Prec. IG} & \textbf{AUC AC} \\
+\midrule
+\multicolumn{8}{l}{\textit{Balanceamento (conjunto completo, 18 atributos)}} \\
+\midrule
+Regressão Logística & Nenhum$\dagger$ & 0,556 $\pm$ 0,076 & 37,0 & 46,6 & 21,0 & 48,6 & 0,944 \\
+ & Pesos de classe & 0,483 $\pm$ 0,013 & 71,2 & 17,7 & 48,1 & 14,9 & 0,931 \\
+ & SMOTENC & 0,513 $\pm$ 0,022 & 64,4 & 22,8 & 49,4 & 16,2 & 0,931 \\
+\midrule
+Random Forest & Nenhum & 0,575 $\pm$ 0,031 & 41,1 & 62,5 & 17,3 & 43,8 & 0,933 \\
+ & Pesos de classe & 0,622 $\pm$ 0,020 & 63,0 & 43,4 & 37,0 & 37,5 & 0,953 \\
+ & SMOTENC$\dagger$ & 0,623 $\pm$ 0,009 & 60,3 & 45,8 & 43,2 & 33,0 & 0,945 \\
+\midrule
+\multicolumn{8}{l}{\textit{Conjunto de atributos (balanceamento selecionado); entre parênteses, o número de atributos}} \\
+\midrule
+Regressão Logística & Completo (18)$\dagger$ & 0,556 $\pm$ 0,076 & 37,0 & 46,6 & 21,0 & 48,6 & 0,944 \\
+ & Sem calendário (15) & 0,535 $\pm$ 0,088 & 37,0 & 50,0 & 16,0 & 37,1 & 0,959 \\
+ & Sem descrição do evento (15) & 0,504 $\pm$ 0,091 & 30,1 & 46,8 & 13,6 & 37,9 & 0,914 \\
+ & Com codificação pelo alvo (20) & 0,557 $\pm$ 0,055 & 32,9 & 45,3 & 25,9 & 42,0 & 0,923 \\
+\midrule
+Random Forest & Completo (18)$\dagger$ & 0,623 $\pm$ 0,009 & 60,3 & 45,8 & 43,2 & 33,0 & 0,945 \\
+ & Sem calendário (15) & 0,604 $\pm$ 0,018 & 58,9 & 42,6 & 35,8 & 33,0 & 0,938 \\
+ & Sem descrição do evento (15) & 0,545 $\pm$ 0,022 & 50,7 & 40,2 & 25,9 & 20,4 & 0,916 \\
+ & Com codificação pelo alvo (20) & 0,612 $\pm$ 0,028 & 56,2 & 50,6 & 27,2 & 43,1 & 0,954 \\
+\bottomrule
+\end{tabular}

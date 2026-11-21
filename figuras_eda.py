@@ -99,6 +99,15 @@ for titulo, g in [("Tipo de operação", op), ("Tipo de motor", mot), ("Equipame
     "\\begin{tabular}{lccccc}\n\\toprule\n\\textbf{Atributo} & \\textbf{Ocorrências} & \\textbf{Inc. graves} & \\textbf{Acidentes} & "
     "\\textbf{\\% inc. graves} & \\textbf{\\% acidentes} \\\\\n\\midrule\n" + "\n".join(linhas) + "\n\\bottomrule\n\\end{tabular}\n",
     encoding="utf-8")
+# versao curta (operacao e motor) usada no relatorio final
+linhas_curta = []
+for titulo, g in [("Tipo de operação", op), ("Tipo de motor", mot)]:
+    linhas_curta.append(f"\\multicolumn{{6}}{{l}}{{\\textit{{{titulo}}}}} \\\\")
+    linhas_curta += [linha(ROT[k], r) for k, r in g.iterrows()]
+(TAB / "tab_operacao_curta.tex").write_text(
+    "\\begin{tabular}{lccccc}\n\\toprule\n\\textbf{Atributo} & \\textbf{Ocorrências} & \\textbf{Inc. graves} & \\textbf{Acidentes} & "
+    "\\textbf{\\% inc. graves} & \\textbf{\\% acidentes} \\\\\n\\midrule\n" + "\n".join(linhas_curta) + "\n\\bottomrule\n\\end{tabular}\n",
+    encoding="utf-8")
 
 cap = lambda s: s[0] + s[1:].lower()
 NOME_CAT = {"PERDA DE CONTROLE OU COLISÃO EM VOO": "Perda de controle / colisão em voo"}
