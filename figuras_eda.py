@@ -121,38 +121,38 @@ linhas.append(f"\\midrule\n\\textbf{{Total}} & \\textbf{{{mil(n)}}} & \\textbf{{
     "\n\\bottomrule\n\\end{tabular}\n", encoding="utf-8")
 
 # ------------------------------------------------------------------ figuras
-plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9})
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7.5})  # figuras desenhadas no tamanho de impressao
 AZUL, AZUL_CLARO, LARANJA, VERMELHO = "#1f3b73", "#8faadc", "#e39a4c", "#b23a3a"
 
 # Figura 1: ocorrencias por ano e tipo de operacao; incidentes graves e acidentes por ano
 anual = pd.crosstab(b.ano, b.tipo_operacao).reindex(columns=["REGULAR", "NÃO REGULAR", "TÁXI AÉREO"], fill_value=0)
 sev = b.groupby("ano")[["IG", "AC"]].sum().reindex(anual.index, fill_value=0)
 cores = {"REGULAR": AZUL, "NÃO REGULAR": AZUL_CLARO, "TÁXI AÉREO": LARANJA}
-fig, (ax, ax2) = plt.subplots(2, 1, figsize=(7.2, 4.3), sharex=True, gridspec_kw={"height_ratios": [2, 1.1]})
+fig, (ax, ax2) = plt.subplots(2, 1, figsize=(4.7, 2.9), sharex=True, gridspec_kw={"height_ratios": [2, 1.1]})
 base = pd.Series(0, index=anual.index)
 for c in anual.columns:
     ax.bar(anual.index, anual[c], bottom=base, color=cores[c], label=ROT[c], width=0.7)
     base += anual[c]
 for a, tot in base.items():
-    ax.text(a, tot + base.max() * 0.02, str(int(tot)), ha="center", fontsize=7.5)
+    ax.text(a, tot + base.max() * 0.02, str(int(tot)), ha="center", fontsize=6)
 ax.set_ylim(0, base.max() * 1.18)
 ax.set_ylabel("Ocorrências")
-ax.legend(fontsize=7.5, frameon=False, loc="upper left", title="Tipo de operação", title_fontsize=7.5)
+ax.legend(fontsize=6, frameon=False, loc="upper left", title="Tipo de operação", title_fontsize=6)
 w = 0.36
 ax2.bar(sev.index - w / 2, sev.IG, width=w, color=AZUL_CLARO, label="Incidentes graves")
 ax2.bar(sev.index + w / 2, sev.AC, width=w, color=VERMELHO, label="Acidentes")
 for a, r in sev.iterrows():
-    ax2.text(a - w / 2, r.IG + 0.4, str(int(r.IG)), ha="center", fontsize=6.5)
-    ax2.text(a + w / 2, r.AC + 0.4, str(int(r.AC)), ha="center", fontsize=6.5)
+    ax2.text(a - w / 2, r.IG + 0.4, str(int(r.IG)), ha="center", fontsize=5.5)
+    ax2.text(a + w / 2, r.AC + 0.4, str(int(r.AC)), ha="center", fontsize=5.5)
 ax2.set_ylim(0, sev.to_numpy().max() * 1.3)
 ax2.set_ylabel("Ocorrências")
-ax2.legend(fontsize=7.5, frameon=False, loc="upper right", ncol=2)
+ax2.legend(fontsize=6, frameon=False, loc="upper right", ncol=2)
 ax2.set_xticks(anual.index)
 ax2.set_xticklabels([f"{a}*" if a in (ini.year, fim.year) else str(a) for a in anual.index])
 for eixo in (ax, ax2):
     eixo.spines[["top", "right"]].set_visible(False)
 fig.tight_layout()
-fig.savefig(FIG / "fig1_anual.png", dpi=220)
+fig.savefig(FIG / "fig1_anual.png", dpi=300)
 plt.close(fig)
 
 # Figura 2: incidentes graves e acidentes por 100 ocorrencias, por regiao e por local

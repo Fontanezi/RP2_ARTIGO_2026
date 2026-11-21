@@ -451,7 +451,7 @@ for m in ["LR", "RF"]:
     "\\textbf{F1-macro} & \\textbf{AUC AC} \\\\\n\\midrule\n" + "\n".join(blocos) + "\n\\bottomrule\n\\end{tabular}\n", encoding="utf-8")
 
 # ================================================================== figuras
-plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9})
+plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 7.5})  # figuras desenhadas no tamanho de impressao (15 cm)
 AZUL, LARANJA = "#1f3b73", "#e39a4c"
 cor = {"LR": AZUL, "RF": LARANJA}
 rot_curto = [ROTULO[c] for c in CLASSES]
@@ -476,26 +476,27 @@ for ax, m in zip(eixos, ["LR", "RF"]):
 fig.tight_layout(); fig.savefig(FIG / "fig3_confusao.png", dpi=220); plt.close(fig)
 
 # Figura 4: ROC e precisao-sensibilidade (OOF)
-fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.2, 3.0))
+SIGLA = {"LR": "RL", "RF": "RF"}
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(5.9, 2.1))
 for m in ["LR", "RF"]:
     for classe, ls, alpha in [(AC, "-", 1.0), (IG, "--", 0.8)]:
         yb = (y_tr == classe).astype(int)
         fpr, tpr, _ = roc_curve(yb, oof_proba[m][:, classe]); prec, rec, _ = precision_recall_curve(yb, oof_proba[m][:, classe])
         auc = roc_auc_score(yb, oof_proba[m][:, classe]); ap = average_precision_score(yb, oof_proba[m][:, classe])
-        a1.plot(fpr, tpr, ls, color=cor[m], alpha=alpha, lw=1.4, label=f"{NOME_MODELO[m]}, {ROTULO[CLASSES[classe]].lower()} (AUC {num_pt(auc)})")
-        a2.plot(rec, prec, ls, color=cor[m], alpha=alpha, lw=1.4, label=f"{NOME_MODELO[m]}, {ROTULO[CLASSES[classe]].lower()} (AP {num_pt(ap)})")
+        a1.plot(fpr, tpr, ls, color=cor[m], alpha=alpha, lw=1.4, label=f"{SIGLA[m]}, {ROTULO[CLASSES[classe]].lower()} (AUC {num_pt(auc)})")
+        a2.plot(rec, prec, ls, color=cor[m], alpha=alpha, lw=1.4, label=f"{SIGLA[m]}, {ROTULO[CLASSES[classe]].lower()} (AP {num_pt(ap)})")
 mr = np.array(resultados["baselines"]["regra"]["treino"]["matriz"])
 fpr_regra = (mr[INC, AC] + mr[IG, AC]) / (mr[INC].sum() + mr[IG].sum())
-a1.plot(fpr_regra, rec_regra, "D", color="black", ms=4, label="Regra pelo tipo de operação")
-a2.plot(rec_regra, resultados["baselines"]["regra"]["treino"]["prec_ac"], "D", color="black", ms=4, label="Regra pelo tipo de operação")
+a1.plot(fpr_regra, rec_regra, "D", color="black", ms=4, label="Regra (tipo de operação)")
+a2.plot(rec_regra, resultados["baselines"]["regra"]["treino"]["prec_ac"], "D", color="black", ms=4, label="Regra (tipo de operação)")
 a1.plot([0, 1], [0, 1], ":", color="gray", lw=1)
-a1.set_xlabel("Taxa de falsos positivos"); a1.set_ylabel("Sensibilidade"); a1.set_title("(a) ROC", fontsize=9)
-a2.set_xlabel("Sensibilidade"); a2.set_ylabel("Precisão"); a2.set_title("(b) Precisão-sensibilidade", fontsize=9)
+a1.set_xlabel("Taxa de falsos positivos"); a1.set_ylabel("Sensibilidade"); a1.set_title("(a) ROC", fontsize=8)
+a2.set_xlabel("Sensibilidade"); a2.set_ylabel("Precisão"); a2.set_title("(b) Precisão-sensibilidade", fontsize=8)
 a2.axhline(prev_ac, ls=":", color="gray", lw=1)
-a1.legend(fontsize=6.3, frameon=False, loc="lower right"); a2.legend(fontsize=6.3, frameon=False, loc="upper right")
+a1.legend(fontsize=5.6, frameon=False, loc="lower right"); a2.legend(fontsize=5.6, frameon=False, loc="upper right")
 for a in (a1, a2):
     a.set_xlim(0, 1); a.set_ylim(0, 1.02); a.spines[["top", "right"]].set_visible(False)
-fig.tight_layout(); fig.savefig(FIG / "fig4_curvas.png", dpi=220); plt.close(fig)
+fig.tight_layout(); fig.savefig(FIG / "fig4_curvas.png", dpi=300); plt.close(fig)
 
 # Figura 5: contrastes da LR e importancia por permutacao do RF
 assert not CONJUNTOS[BASE_FINAL][2], "contrastes da LR pressupoem conjunto final sem codificacao pelo alvo"
@@ -545,48 +546,48 @@ perm = permutation_importance(rf, X_te[colunas(BASE_FINAL)], y_te, scoring="roc_
 imp_df = pd.DataFrame({"atributo": [NOME[c] for c in colunas(BASE_FINAL)], "media": perm.importances_mean, "dp": perm.importances_std}).sort_values("media")
 imp_df.to_csv(RES / "rf_importancia_permutacao.csv", index=False)
 
-fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.2, 3.6), gridspec_kw={"width_ratios": [1.15, 1]})
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(5.9, 2.5), gridspec_kw={"width_ratios": [1.2, 1]})
 a1.barh(range(len(top)), top.log_or, color=[LARANJA if v > 0 else AZUL for v in top.log_or])
-a1.set_yticks(range(len(top))); a1.set_yticklabels(top.atributo, fontsize=6.6); a1.axvline(0, color="black", lw=0.8)
-a1.set_xlabel("log da razão de chances, acidente vs. incidente", fontsize=8); a1.set_title("(a) Regressão Logística", fontsize=9)
-a2.barh(range(len(imp_df)), imp_df.media, xerr=imp_df.dp, color=AZUL, error_kw={"lw": 0.7})
-a2.set_yticks(range(len(imp_df))); a2.set_yticklabels(imp_df.atributo, fontsize=6.6)
-a2.set_xlabel("Queda da AUC ao permutar", fontsize=8); a2.set_title("(b) Random Forest", fontsize=9)
+a1.set_yticks(range(len(top))); a1.set_yticklabels(top.atributo, fontsize=6); a1.axvline(0, color="black", lw=0.8)
+a1.set_xlabel("log da razão de chances, acidente vs. incidente", fontsize=7); a1.set_title("(a) Regressão Logística", fontsize=8)
+a2.barh(range(len(imp_df)), imp_df.media, xerr=imp_df.dp, color=AZUL, error_kw={"lw": 0.6})
+a2.set_yticks(range(len(imp_df))); a2.set_yticklabels(imp_df.atributo, fontsize=6)
+a2.set_xlabel("Queda da AUC", fontsize=7); a2.set_title("(b) Random Forest", fontsize=8)
 for a in (a1, a2):
-    a.spines[["top", "right"]].set_visible(False); a.tick_params(axis="x", labelsize=7.5)
-fig.tight_layout(w_pad=1.0); fig.savefig(FIG / "fig5_importancias.png", dpi=220); plt.close(fig)
+    a.spines[["top", "right"]].set_visible(False); a.tick_params(axis="x", labelsize=6.5)
+fig.tight_layout(w_pad=1.0); fig.savefig(FIG / "fig5_importancias.png", dpi=300); plt.close(fig)
 
 # Figura 6: calibracao e limiar
-fig, (a1, a2) = plt.subplots(1, 2, figsize=(7.2, 3.6))
+fig, (a1, a2) = plt.subplots(1, 2, figsize=(5.9, 2.35))
 a1.plot([1e-4, 1], [1e-4, 1], ":", color="gray", lw=1, label="Calibração perfeita")
 for m in ["LR", "RF"]:
     c = calib[m]["oof"]
     a1.plot([x["p_medio"] for x in c], [max(x["observado"], 2e-4) for x in c], "o-", color=cor[m], ms=3.5, lw=1.2,
             label=f"{NOME_MODELO[m]} (Brier {num_pt(calib[m]['brier_oof'], 3)})")
 a1.axvline(prev_ac, color="gray", lw=0.8, ls="--"); a1.axhline(prev_ac, color="gray", lw=0.8, ls="--")
-a1.text(prev_ac * 1.15, 2.6e-4, "prevalência", fontsize=6.5, color="gray")
+a1.text(prev_ac * 1.15, 2.6e-4, "prevalência", fontsize=5.8, color="gray")
 a1.set_xscale("log"); a1.set_yscale("log")
 a1.set_xlim(2e-4, 1); a1.set_ylim(2e-4, 1)
 a1.set_xlabel("Probabilidade prevista de acidente (média da faixa)"); a1.set_ylabel("Fração observada de acidentes")
-a1.set_title("(a) Confiabilidade de P(acidente), out-of-fold", fontsize=9)
-a1.legend(fontsize=6.5, frameon=False, loc="upper left")
+a1.set_title("(a) Confiabilidade de P(acidente)", fontsize=8)
+a1.legend(fontsize=5.8, frameon=False, loc="upper left")
 taus = np.linspace(0.005, 0.95, 400)
 for m in ["LR", "RF"]:
     p = oof_proba[m][:, AC]
     sens = [((p >= t) & (y_tr_ac == 1)).sum() / y_tr_ac.sum() for t in taus]
     prec = [((p >= t) & (y_tr_ac == 1)).sum() / max((p >= t).sum(), 1) for t in taus]
-    a2.plot(taus, sens, "-", color=cor[m], lw=1.4, label=f"{NOME_MODELO[m]}: sensibilidade")
-    a2.plot(taus, prec, "--", color=cor[m], lw=1.4, label=f"{NOME_MODELO[m]}: precisão")
+    a2.plot(taus, sens, "-", color=cor[m], lw=1.4, label=f"{SIGLA[m]}: sensibilidade")
+    a2.plot(taus, prec, "--", color=cor[m], lw=1.4, label=f"{SIGLA[m]}: precisão")
     a2.axvline(limiar[m]["tau"], color=cor[m], ls=":", lw=1)
 a2.axhline(ALVO_SENS, color="gray", ls=":", lw=1)
-a2.text(0.93, ALVO_SENS + 0.02, f"sensibilidade {int(ALVO_SENS * 100)}%", fontsize=6.5, color="gray", ha="right")
+a2.text(0.94, ALVO_SENS - 0.07, f"sensibilidade {int(ALVO_SENS * 100)}%", fontsize=5.8, color="gray", ha="right")
 a2.set_xlabel("Limiar de decisão para a classe acidente"); a2.set_ylabel("Sensibilidade / precisão (acidente)")
-a2.set_title("(b) Sensibilidade e precisão em função do limiar", fontsize=9)
+a2.set_title("(b) Sensibilidade e precisão vs. limiar", fontsize=8)
 a2.set_xlim(0, 0.95); a2.set_ylim(0, 1.02)
-a2.legend(fontsize=6.5, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.22), ncol=2)
+a2.legend(fontsize=5.6, frameon=False, loc="upper right", ncol=2, columnspacing=0.8, handlelength=1.6)
 for a in (a1, a2):
     a.spines[["top", "right"]].set_visible(False)
-fig.tight_layout(); fig.savefig(FIG / "fig6_limiar_calibracao.png", dpi=220); plt.close(fig)
+fig.tight_layout(); fig.savefig(FIG / "fig6_limiar_calibracao.png", dpi=300); plt.close(fig)
 
 # ================================================================== persistencia
 resultados["lr_razoes_de_chance_top"] = top.to_dict("records")

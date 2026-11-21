@@ -23,6 +23,9 @@
 \renewcommand{\floatpagefraction}{0.85}
 \setcounter{topnumber}{3}
 \setcounter{totalnumber}{4}
+\setlength{\textfloatsep}{11pt plus 2pt minus 3pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
 
 \sloppy
 
@@ -146,12 +149,12 @@ A Tabela~\ref{tab:correlatos} sintetiza a comparação. Em contraste com os trab
 
 A base foi construída conforme a Seção~\ref{sec:atributos}: dos 14.626 registros dos arquivos do CENIPA, 9.471 estão na janela de dez anos e 5.038 envolvem ao menos uma aeronave em operação comercial, uma linha por ocorrência. A omissão é inferior a 1\% nos atributos categóricos candidatos a preditor e maior apenas no número de assentos (10,2\%) e no ano de fabricação (14,2\%); os nulos foram mantidos na base publicada (BASE\_SIPAER.xlsx, 5.038 linhas e 44 colunas, com dicionário de dados), pois a imputação é ajustada no treino. A base contém 91 acidentes (1,81\%), 102 incidentes graves (2,02\%) e 4.845 incidentes (96,2\%); 17 acidentes tiveram vítimas fatais, somando 122 mortes, 62 delas em Vinhedo (SP), em 09/08/2024, e nenhum incidente grave registrou fatalidade.
 
-Vários atributos das tabelas cruzadas só existem porque a ocorrência foi investigada, e a investigação completa é feita quase apenas para acidentes e incidentes graves (Tabela~\ref{tab:posevento}): relatório final, fatores contribuintes e recomendações aparecem em 61\% a 68\% dos acidentes e em 44\% a 45\% dos incidentes graves, mas em 0,1\% dos incidentes; o nível de dano integra a definição de acidente (92\% dos acidentes com dano substancial ou aeronave destruída, contra 2\% dos incidentes graves). Usá-los como preditores entregaria ao modelo a própria resposta. Nos 56 acidentes com fatores registrados predominam as áreas operacional (54) e humana (46), com processo decisório (25) e julgamento de pilotagem (24) à frente; nos 45 incidentes graves com fatores, percepção (20), atenção (19) e atitude (19).
+Vários atributos só existem porque a ocorrência foi investigada, e a investigação completa é feita quase apenas para acidentes e incidentes graves (Tabela~\ref{tab:posevento}): relatório final, fatores contribuintes e recomendações aparecem em 61\% a 68\% dos acidentes e em 44\% a 45\% dos incidentes graves, mas em 0,1\% dos incidentes; o nível de dano integra a definição de acidente (92\% dos acidentes com dano substancial ou aeronave destruída, contra 2\% dos incidentes graves). Usá-los como preditores entregaria ao modelo a própria resposta. Nos 56 acidentes com fatores registrados predominam as áreas operacional (54) e humana (46), com processo decisório (25) e julgamento de pilotagem (24) à frente; nos 45 incidentes graves com fatores, percepção (20), atenção (19) e atitude (19).
 
 \begin{table}[htbp]
     \centering
     \caption{Atributos produzidos pela investigação, por classe}
-    \vspace{0.15cm}
+    \vspace{0.05cm}
     \footnotesize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{0.88}
     \input{tabelas/tab_posevento.tex}
     \label{tab:posevento}
@@ -160,23 +163,23 @@ Vários atributos das tabelas cruzadas só existem porque a ocorrência foi inve
 \subsection{Operação, aeronave e tipo de ocorrência}
 \label{sec:operacao}
 
-O tipo de operação é o atributo que mais separa as classes (Tabela~\ref{tab:operacao}): a operação regular responde por 85,4\% das ocorrências, mas por apenas 12 acidentes (0,28\%) e 43 incidentes graves (1,0\%); o táxi aéreo, com 12,9\% das ocorrências, concentra 72 dos 91 acidentes (11,1\%) e 50 incidentes graves (7,7\%), e a operação não regular tem a maior taxa de incidente grave (10,2\%). As características da aeronave seguem o padrão: taxa de acidentes de 22,6\% em aeronaves a pistão contra 0,32\% nos jatos, de 15,9\% nas monomotoras e de 7,5\% nos helicópteros. As medianas de idade e de peso máximo de decolagem ordenam as classes: 11 anos e 70,5 t nos incidentes, 16 anos e 7,3 t nos incidentes graves, 32 anos e 2,2 t nos acidentes. Esses atributos não são independentes: o táxi aéreo reúne 153 das 199 aeronaves a pistão e 266 dos 375 helicópteros, além de aeronaves mais leves e antigas, o que torna instáveis as razões de chance individuais da Regressão Logística. Nenhuma das 547 ocorrências em solo resultou em acidente; as taxas de acidente são maiores no cruzeiro e descida (2,73\%) e na aproximação e pouso (2,37\%), fase que concentra 66 dos 102 incidentes graves.
+O tipo de operação é o atributo que mais separa as classes (Tabela~\ref{tab:operacao}): a operação regular responde por 85,4\% das ocorrências, mas por apenas 12 acidentes (0,28\%) e 43 incidentes graves (1,0\%); o táxi aéreo, com 12,9\% das ocorrências, concentra 72 dos 91 acidentes (11,1\%) e 50 incidentes graves (7,7\%), e a operação não regular tem a maior taxa de incidente grave (10,2\%). As características da aeronave seguem o padrão: taxa de acidentes de 22,6\% em aeronaves a pistão contra 0,32\% nos jatos, de 15,9\% nas monomotoras e de 7,5\% nos helicópteros. As medianas de idade e de peso máximo de decolagem ordenam as classes: 11 anos e 70,5 t nos incidentes, 16 anos e 7,3 t nos incidentes graves, 32 anos e 2,2 t nos acidentes. Esses atributos não são independentes: o táxi aéreo reúne 153 das 199 aeronaves a pistão e 266 dos 375 helicópteros, além de aeronaves mais leves e antigas, o que torna instáveis as razões de chance individuais da Regressão Logística. Nenhuma das 547 ocorrências em solo resultou em acidente, e a aproximação e pouso concentra 66 dos 102 incidentes graves.
 
 \begin{table}[htbp]
     \centering
     \caption{Incidentes graves e acidentes por tipo de operação e tipo de motor}
-    \vspace{0.15cm}
+    \vspace{0.05cm}
     \footnotesize\setlength{\tabcolsep}{5pt}\renewcommand{\arraystretch}{0.88}
     \input{tabelas/tab_operacao_curta.tex}
     \label{tab:operacao}
 \end{table}
 
-Os 65 tipos de ocorrência foram agrupados em sete categorias; nas 80 ocorrências com mais de um tipo, prevaleceu o mais próximo da perda da aeronave (Tabela~\ref{tab:tipos_ocorrencia}). Falhas técnicas e colisões com fauna somam 84,9\% das ocorrências, mas as colisões com fauna quase nunca evoluem para incidente grave ou acidente (0 e 1 em 1.767). Perda de controle ou colisão em voo (60,0\% de acidentes e 25,0\% de incidentes graves) e pista, pouso e solo (9,9\% e 12,7\%) têm as maiores taxas. O tráfego aéreo não registra acidentes, mas reúne 21 incidentes graves (10,9\%), em geral conflitos entre duas aeronaves. Os perfis diferem: a falha do motor em voo (14 acidentes e nenhum incidente grave em 122 registros) e a perda de controle levam ao acidente; tráfego aéreo e ocorrências em pista geram incidentes graves, o que sustenta a formulação em três classes.
+Os 65 tipos de ocorrência foram agrupados em sete categorias; nas 80 ocorrências com mais de um tipo, prevaleceu o mais próximo da perda da aeronave (Tabela~\ref{tab:tipos_ocorrencia}). Falhas técnicas e colisões com fauna somam 84,9\% das ocorrências, mas as colisões com fauna quase nunca evoluem para incidente grave ou acidente (0 e 1 em 1.767). Perda de controle ou colisão em voo (60,0\% de acidentes e 25,0\% de incidentes graves) e pista, pouso e solo (9,9\% e 12,7\%) têm as maiores taxas. O tráfego aéreo não registra acidentes, mas reúne 21 incidentes graves (10,9\%). Os perfis diferem: falha do motor em voo (14 acidentes e nenhum incidente grave em 122 registros) e perda de controle levam ao acidente; tráfego aéreo e ocorrências em pista geram incidentes graves, o que sustenta as três classes.
 
 \begin{table}[htbp]
     \centering
     \caption{Ocorrências, incidentes graves e acidentes por categoria de tipo}
-    \vspace{0.15cm}
+    \vspace{0.05cm}
     \footnotesize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{0.88}
     \input{tabelas/tab_tipos.tex}
     \label{tab:tipos_ocorrencia}
@@ -185,11 +188,11 @@ Os 65 tipos de ocorrência foram agrupados em sete categorias; nas 80 ocorrênci
 \subsection{Distribuição temporal e geográfica}
 \label{sec:temporal}
 
-A Figura~\ref{fig:temporal} mostra uma descontinuidade a partir de 2023: de 2016 a 2022 há 1.097 ocorrências, e de 2023 a 2026, 3.941, com pico de 1.582 em 2024. O aumento está quase todo na operação regular e nas colisões com fauna (1.462 registros só em 2023 e 2024), enquanto os números anuais de incidentes graves e de acidentes não crescem; suas proporções caem de 5,8\% e 5,9\% antes de 2023 para 1,0\% e 0,7\% depois, o que é compatível com uma ampliação da notificação de incidentes, e não com uma queda real do risco. Por isso, o ano é usado apenas como controle, e a mudança de cobertura motiva a validação temporal da Seção~\ref{sec:validacao_temporal}. Na distribuição geográfica, o Sudeste concentra 50,9\% das ocorrências com taxas de 1,1\% de incidentes graves e 0,8\% de acidentes, enquanto o Norte, com 10,5\% das ocorrências, responde por 32 incidentes graves (6,0\%) e 44 dos 91 acidentes (8,3\%); 35\% das ocorrências do Norte são de táxi aéreo, contra 13\% no país. O local separa as duas classes graves: os aeródromos de código SB reúnem 83,0\% das ocorrências com taxa de acidentes de 0,33\%, mas 57 dos 102 incidentes graves ocorreram neles, enquanto 49 dos 91 acidentes ocorreram fora de aeródromo (8,5\%).
+A Figura~\ref{fig:temporal} mostra uma descontinuidade a partir de 2023: de 2016 a 2022 há 1.097 ocorrências, e de 2023 a 2026, 3.941, com pico de 1.582 em 2024. O aumento está quase todo na operação regular e nas colisões com fauna (1.462 registros só em 2023 e 2024), enquanto os números anuais de incidentes graves e de acidentes não crescem; suas proporções caem de 5,8\% e 5,9\% antes de 2023 para 1,0\% e 0,7\% depois: ampliou-se a notificação de incidentes, não o risco. Por isso, o ano é usado apenas como controle, e a mudança de cobertura motiva a validação temporal (Seção~\ref{sec:validacao_temporal}). Na distribuição geográfica, o Sudeste concentra 50,9\% das ocorrências com taxas de 1,1\% de incidentes graves e 0,8\% de acidentes, enquanto o Norte, com 10,5\% das ocorrências, responde por 32 incidentes graves (6,0\%) e 44 dos 91 acidentes (8,3\%); 35\% das ocorrências do Norte são de táxi aéreo, contra 13\% no país. O local separa as duas classes graves: os aeródromos de código SB reúnem 83,0\% das ocorrências com taxa de acidentes de 0,33\%, mas 57 dos 102 incidentes graves ocorreram neles, enquanto 49 dos 91 acidentes ocorreram fora de aeródromo (8,5\%).
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.42\textwidth]{fig1_anual.png}
+    \includegraphics[width=0.74\textwidth]{fig1_anual.png}
     \caption{Ocorrências por ano e tipo de operação (acima) e incidentes graves e acidentes por ano (abaixo); * 2016 e 2026 parciais}
     \label{fig:temporal}
 \end{figure}
@@ -199,12 +202,12 @@ A Figura~\ref{fig:temporal} mostra uma descontinuidade a partir de 2023: de 2016
 
 A Tabela~\ref{tab:selecao} reúne a seleção. No balanceamento, o efeito depende do algoritmo: na Regressão Logística, o F1-macro é maior sem balanceamento (0,556), e os pesos de classe elevam a sensibilidade para 71\% dos acidentes e 48\% dos incidentes graves ao custo de precisões de 18\% e 15\% (F1-macro de 0,483); no Random Forest, pesos e SMOTENC empatam (0,62) e elevam a sensibilidade para acidentes de 41\% para 60\% a 63\% com precisão em torno de 45\%, e o SMOTENC foi escolhido pela menor variância entre dobras. SMOTENC com pesos reproduziu exatamente o SMOTENC isolado, como previsto na Seção~\ref{sec:protocolo}, e foi omitido da tabela.
 
-Na ablação de atributos, remover o calendário reduziu o F1-macro em 0,02 nos dois algoritmos, acima da tolerância de 0,01, e o conjunto completo foi mantido; a queda é da ordem do desvio-padrão entre repetições (Seção~\ref{sec:desempenho}): o calendário não ajuda nem prejudica de forma mensurável, em linha com sua importância nula por permutação (Seção~\ref{sec:interpretacao}). A descrição do evento é o grupo mais informativo: sem ela, o F1-macro cai para 0,504 (Regressão Logística) e 0,545 (Random Forest), e a AUC para acidente, de 0,94 para 0,91 a 0,92; ainda assim, o Random Forest sem descrição do evento detecta 51\% dos acidentes com 40\% de precisão, bem acima da regra pelo tipo de operação: operação, aeronave, fase e local carregam sinal próprio. A codificação pelo alvo do aeródromo e do tipo detalhado não trouxe ganho em F1-macro (0,557 e 0,612, dentro da variação da validação cruzada) e reduziu a sensibilidade para incidentes graves; o modelo principal manteve os agrupamentos, mais simples com 91 acidentes.
+Na ablação de atributos, remover o calendário reduziu o F1-macro em 0,02 nos dois algoritmos, acima da tolerância de 0,01, e o conjunto completo foi mantido; a queda é da ordem do desvio-padrão entre repetições (Seção~\ref{sec:desempenho}): o calendário não ajuda nem prejudica de forma mensurável, em linha com sua importância nula por permutação (Seção~\ref{sec:interpretacao}). A descrição do evento é o grupo mais informativo: sem ela, o F1-macro cai para 0,504 (Regressão Logística) e 0,545 (Random Forest), e a AUC para acidente, de 0,94 para 0,91 a 0,92; ainda assim, o Random Forest sem descrição do evento detecta 51\% dos acidentes com 40\% de precisão: operação, aeronave, fase e local carregam sinal próprio. A codificação pelo alvo do aeródromo e do tipo detalhado não trouxe ganho em F1-macro (0,557 e 0,612, dentro da variação da validação cruzada) e reduziu a sensibilidade para incidentes graves; o modelo principal manteve os agrupamentos.
 
 \begin{table}[htbp]
     \centering
     \caption{Seleção dos modelos: F1-macro na validação cruzada (média $\pm$ desvio-padrão entre dobras) e métricas \textit{out-of-fold} no treino, em \%, para acidentes (AC) e incidentes graves (IG); $\dagger$ configuração selecionada}
-    \vspace{0.15cm}
+    \vspace{0.05cm}
     \scriptsize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{0.88}
     \input{tabelas/tab_selecao.tex}
     \label{tab:selecao}
@@ -213,36 +216,36 @@ Na ablação de atributos, remover o calendário reduziu o F1-macro em 0,02 nos 
 \subsection{Desempenho e variabilidade}
 \label{sec:desempenho}
 
-A Tabela~\ref{tab:metricas} reúne os baselines e os modelos selecionados, com média e desvio-padrão de dez repetições da validação cruzada. O Random Forest com SMOTENC detecta 56,8 $\pm$ 2,9\% dos acidentes e 37,8 $\pm$ 3,5\% dos incidentes graves (F1-macro de 0,598 $\pm$ 0,010); a Regressão Logística, 39,3 $\pm$ 2,6\% e 21,5 $\pm$ 2,9\% (0,568 $\pm$ 0,016), com precisão maior para acidentes (50,1\% contra 43,7\%). A diferença pareada favorece o Random Forest em F1-macro em nove das dez repetições (+0,030 $\pm$ 0,019) e em sensibilidade para as duas classes graves em todas (+17,5 e +16,3 pontos percentuais); as AUC para acidente são indistinguíveis (0,947 $\pm$ 0,004 contra 0,943 $\pm$ 0,006). Os dois modelos ordenam as ocorrências igualmente bem; o SMOTENC altera o ponto de operação, trocando precisão por sensibilidade. A repetição também corrige uma leitura otimista: o F1-macro do Random Forest na partição usada para selecionar os hiperparâmetros (0,624) é o máximo das dez repetições (0,588 a 0,624), e a média, 0,598, é 0,026 menor; selecionar e avaliar na mesma partição inflou a estimativa. O teste confirma a ordem: o Random Forest detecta 11 dos 18 acidentes e 8 dos 21 incidentes graves (F1-macro de 0,609), contra 10, 2 e 0,560 da Regressão Logística; as AUC no teste (0,97 a 0,98) superam as da validação cruzada, dentro da variância de uma amostra de 18 acidentes.
+A Tabela~\ref{tab:metricas} reúne os baselines e os modelos selecionados, com média e desvio-padrão de dez repetições da validação cruzada. O Random Forest com SMOTENC detecta 56,8 $\pm$ 2,9\% dos acidentes e 37,8 $\pm$ 3,5\% dos incidentes graves (F1-macro de 0,598 $\pm$ 0,010); a Regressão Logística, 39,3 $\pm$ 2,6\% e 21,5 $\pm$ 2,9\% (0,568 $\pm$ 0,016), com precisão maior para acidentes (50,1\% contra 43,7\%). A diferença pareada favorece o Random Forest em F1-macro em nove das dez repetições (+0,030 $\pm$ 0,019) e em sensibilidade para as duas classes graves em todas (+17,5 e +16,3 pontos percentuais); as AUC para acidente são indistinguíveis (0,947 $\pm$ 0,004 contra 0,943 $\pm$ 0,006). Os dois modelos ordenam as ocorrências igualmente bem; o SMOTENC altera o ponto de operação, trocando precisão por sensibilidade. A repetição também corrige uma leitura otimista: o F1-macro do Random Forest na partição usada para selecionar os hiperparâmetros (0,624) é o máximo das dez repetições, 0,026 acima da média; selecionar e avaliar na mesma partição inflou a estimativa. O teste confirma a ordem: o Random Forest detecta 11 dos 18 acidentes e 8 dos 21 incidentes graves (F1-macro de 0,609), contra 10, 2 e 0,560 da Regressão Logística; as AUC no teste (0,97 a 0,98) superam as da validação cruzada, dentro da variância de uma amostra de 18 acidentes.
 
 \begin{table}[htbp]
     \centering
     \caption{Desempenho dos baselines e dos modelos selecionados: validação cruzada repetida no treino e teste; sensibilidade e precisão em \%, para acidentes (AC) e incidentes graves (IG)}
-    \vspace{0.15cm}
+    \vspace{0.05cm}
     \scriptsize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{0.88}
     \input{tabelas/tab_metricas.tex}
     \label{tab:metricas}
 \end{table}
 
-As matrizes de confusão da partição principal localizam os erros: no Random Forest, os acidentes não detectados são previstos sobretudo como incidentes (23) e raramente como incidentes graves (6), ao custo de 107 incidentes (2,8\%) previstos como graves ou acidentes. As curvas da Figura~\ref{fig:curvas} dão a visão independente do limiar: para acidente, AUC de 0,94 e precisão média de 0,41 a 0,44 (prevalência de 1,8\%); para incidente grave, AUC de 0,85 a 0,88 e precisão média de 0,23 a 0,33. No nível de sensibilidade da regra pelo tipo de operação (86\%), a precisão dos modelos para acidentes é de 16,7\% (Regressão Logística) e 13,8\% (Random Forest), contra 10,7\% da regra; a vantagem concentra-se na faixa intermediária, em que o Random Forest mantém precisão de 45\% a 70\% com sensibilidade de 40\% a 65\%.
+As matrizes de confusão da partição principal localizam os erros: no Random Forest, os acidentes não detectados são previstos sobretudo como incidentes (23) e raramente como incidentes graves (6), ao custo de 107 incidentes (2,8\%) previstos como graves ou acidentes. As curvas da Figura~\ref{fig:curvas} dão a visão independente do limiar: para acidente, AUC de 0,94 e precisão média de 0,41 a 0,44 (prevalência de 1,8\%); para incidente grave, AUC de 0,85 a 0,88 e precisão média de 0,23 a 0,33. Na sensibilidade da regra pelo tipo de operação (86\%), a precisão dos modelos para acidentes é de 16,7\% (Regressão Logística) e 13,8\% (Random Forest), contra 10,7\%; a vantagem concentra-se na faixa intermediária, em que o Random Forest mantém precisão de 45\% a 70\% com sensibilidade de 40\% a 65\%.
 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.5\textwidth]{fig4_curvas.png}
-    \caption{Curvas ROC (a) e precisão-sensibilidade (b) um-contra-resto para as classes acidente e incidente grave, predições \textit{out-of-fold} no treino; o losango marca a regra pelo tipo de operação e a linha pontilhada em (b), a prevalência de acidentes}
+    \includegraphics[width=\textwidth]{fig4_curvas.png}
+    \caption{Curvas ROC (a) e precisão-sensibilidade (b) um-contra-resto para as classes acidente e incidente grave, predições \textit{out-of-fold} no treino (RL: Regressão Logística; RF: Random Forest); o losango marca a regra pelo tipo de operação e a linha pontilhada em (b), a prevalência de acidentes}
     \label{fig:curvas}
 \end{figure}
 
 \subsection{Validação temporal}
 \label{sec:validacao_temporal}
 
-A Tabela~\ref{tab:temporal} apresenta a validação temporal. Treinados nas 1.097 ocorrências de 2016 a 2022 (65 acidentes) e avaliados nas 3.941 de 2023 a 2026 (26 acidentes e 38 incidentes graves), os modelos mantêm a capacidade de ordenação: AUC de 0,974 (Regressão Logística) e 0,954 (Random Forest) para acidente, iguais ou superiores às da partição aleatória. O ponto de operação, porém, degrada-se: a precisão para acidentes cai para 30,8\% e 20,6\%, e o Random Forest passa a prever 206 incidentes graves (5,2\% do teste) com precisão de 11,7\%. A causa é a mudança da taxa-base: a proporção de acidentes caiu de 5,9\% para 0,7\% com a ampliação da notificação de incidentes, e um modelo treinado com a prevalência antiga, ainda mais inflada pelo SMOTENC, emite alertas demais na nova. A ordenação aprendida transferiu-se bem entre os períodos, mas, para uso prospectivo, limiar e probabilidades precisam ser recalibrados à prevalência corrente.
+A Tabela~\ref{tab:temporal} apresenta a validação temporal. Treinados em 2016--2022 (65 acidentes) e avaliados em 2023--2026 (26 acidentes e 38 incidentes graves), os modelos mantêm a capacidade de ordenação: AUC de 0,974 (Regressão Logística) e 0,954 (Random Forest) para acidente, iguais ou superiores às da partição aleatória. O ponto de operação, porém, degrada-se: a precisão para acidentes cai para 30,8\% e 20,6\%, e o Random Forest passa a prever 206 incidentes graves (5,2\% do teste) com precisão de 11,7\%. A causa é a mudança da taxa-base: a proporção de acidentes caiu de 5,9\% para 0,7\% com a ampliação da notificação de incidentes, e um modelo treinado com a prevalência antiga, ainda mais inflada pelo SMOTENC, emite alertas demais na nova. Para uso prospectivo, limiar e probabilidades precisam ser recalibrados à prevalência corrente.
 
 \begin{table}[htbp]
     \centering
     \caption{Validação temporal: modelos treinados em 2016--2022 e avaliados em 2023--2026; sensibilidade e precisão em \%}
-    \vspace{0.15cm}
+    \vspace{0.05cm}
     \scriptsize\setlength{\tabcolsep}{3.5pt}\renewcommand{\arraystretch}{0.88}
     \input{tabelas/tab_temporal.tex}
     \label{tab:temporal}
@@ -251,11 +254,11 @@ A Tabela~\ref{tab:temporal} apresenta a validação temporal. Treinados nas 1.09
 \subsection{Interpretação dos modelos}
 \label{sec:interpretacao}
 
-A Figura~\ref{fig:importancias} resume o que os modelos aprenderam. Na Regressão Logística (Figura~\ref{fig:importancias}a), os contrastes que mais elevam a chance de acidente em relação a incidente são perda de controle ou colisão em voo frente à falha técnica (razão de chances da ordem de $10^3$), Robinson frente à Airbus (58), turboeixo frente ao jato (48), fora de aeródromo frente aos aeródromos SB (26), operações não regular (14,9) e de táxi aéreo (14,8) frente à regular e Norte frente ao Sudeste (13,3); reduzem a chance a fase de solo (0,01), o helicóptero frente ao avião (0,03) e a colisão com fauna (0,06). Cessna, Sikorsky e Embraer aparecem com chance menor que a Airbus apesar de taxas brutas maiores: é a colinearidade antecipada na Seção~\ref{sec:operacao}, pois a taxa marginal desses fabricantes é absorvida pelo tipo de operação, pelo motor e pelo peso, e, com regularização fraca ($C = 10$), os coeficientes individuais tornam-se instáveis e devem ser lidos em conjunto. O Random Forest (Figura~\ref{fig:importancias}b) atribui as maiores importâncias ao tipo de operação, ao peso máximo de decolagem, à fase do voo, ao local e à categoria do tipo, seguidos pelo número de aeronaves envolvidas e pela saída de pista; mês, dia da semana, hora e assentos têm importância nula ou negativa, coerente com a ablação.
+A Figura~\ref{fig:importancias} resume o que os modelos aprenderam. Na Regressão Logística (Figura~\ref{fig:importancias}a), os contrastes que mais elevam a chance de acidente em relação a incidente são perda de controle ou colisão em voo frente à falha técnica (razão de chances da ordem de $10^3$), Robinson frente à Airbus (58), turboeixo frente ao jato (48), fora de aeródromo frente aos aeródromos SB (26), operações não regular (14,9) e de táxi aéreo (14,8) frente à regular e Norte frente ao Sudeste (13,3); reduzem a chance a fase de solo (0,01), o helicóptero frente ao avião (0,03) e a colisão com fauna (0,06). Cessna, Sikorsky e Embraer aparecem com chance menor que a Airbus apesar de taxas brutas maiores: é a colinearidade antecipada na Seção~\ref{sec:operacao}, pois sua taxa marginal é absorvida pelo tipo de operação, pelo motor e pelo peso, e os coeficientes individuais devem ser lidos em conjunto. O Random Forest (Figura~\ref{fig:importancias}b) atribui as maiores importâncias ao tipo de operação, ao peso máximo de decolagem, à fase do voo, ao local e à categoria do tipo, seguidos pelo número de aeronaves envolvidas e pela saída de pista; mês, dia da semana, hora e assentos têm importância nula ou negativa, coerente com a ablação.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.55\textwidth]{fig5_importancias.png}
+    \includegraphics[width=\textwidth]{fig5_importancias.png}
     \caption{(a) Oito maiores e oito menores contrastes de log da razão de chances entre acidente e incidente na Regressão Logística, em relação ao nível mais frequente de cada atributo; (b) importância por permutação no Random Forest, medida pela queda da AUC um-contra-resto no teste (média e desvio-padrão de 30 repetições)}
     \label{fig:importancias}
 \end{figure}
@@ -263,14 +266,14 @@ A Figura~\ref{fig:importancias} resume o que os modelos aprenderam. Na Regressã
 \subsection{Limiar de decisão e calibração}
 \label{sec:limiar}
 
-Com o limiar ajustado para sensibilidade de 80\% no treino (Figura~\ref{fig:calibracao}b), a Regressão Logística passa a classificar como acidente toda ocorrência com $P(\text{acidente}) \geq 0{,}029$, e o Random Forest, $\geq 0{,}130$. Fora da amostra, ambos detectam 59 dos 73 acidentes (80,8\%): a Regressão Logística com 263 alertas (6,5\% das ocorrências) e precisão de 22,4\%, o Random Forest com 342 alertas e precisão de 17,3\%. A regra pelo tipo de operação atinge sensibilidade semelhante (86\%) com 588 alertas e precisão de 10,7\%: para o mesmo nível de detecção, a Regressão Logística reduz o volume de alertas à metade, e 36\% dos seus alertas são acidentes ou incidentes graves, contra 19\% dos da regra. No teste, com os mesmos limiares, a Regressão Logística detecta 17 dos 18 acidentes com 73 alertas (precisão de 23,3\%) e o Random Forest, 15 com 78 alertas (19,2\%).
+Com o limiar ajustado para sensibilidade de 80\% no treino (Figura~\ref{fig:calibracao}b), a Regressão Logística passa a classificar como acidente toda ocorrência com $P(\text{acidente}) \geq 0{,}029$, e o Random Forest, $\geq 0{,}130$. Fora da amostra, ambos detectam 59 dos 73 acidentes (80,8\%): a Regressão Logística com 263 alertas (6,5\% das ocorrências) e precisão de 22,4\%, o Random Forest com 342 alertas e precisão de 17,3\%. A regra pelo tipo de operação atinge sensibilidade semelhante (86\%) com 588 alertas e precisão de 10,7\%: a Regressão Logística reduz o volume de alertas à metade, e 36\% dos seus alertas são ocorrências graves, contra 19\% dos da regra. No teste, com os mesmos limiares, a Regressão Logística detecta 17 dos 18 acidentes com 73 alertas (precisão de 23,3\%) e o Random Forest, 15 com 78 alertas (19,2\%).
 
 A calibração (Figura~\ref{fig:calibracao}a) separa os dois modelos. A Regressão Logística tem escore de Brier de 0,0144 fora da amostra, 19\% abaixo do previsor constante igual à prevalência (0,0178), e probabilidade média prevista igual à prevalência (1,8\%). O Random Forest tem Brier de 0,0162 (9\% abaixo da referência) e probabilidade média de 4,4\%, 2,4 vezes a prevalência: em todas as faixas a probabilidade prevista supera a observada por um fator de 2 a 4 (50\% previsto contra 25\% observado nos 5\% de maior risco). O excesso é consequência direta do SMOTENC, que treina o modelo com um terço de acidentes e desloca a escala das probabilidades. Como escore de risco, a Regressão Logística fornece probabilidades utilizáveis sem ajuste; o Random Forest ordena tão bem quanto ela, mas requer recalibração antes de suas probabilidades serem lidas como risco.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.56\textwidth]{fig6_limiar_calibracao.png}
-    \caption{(a) Diagrama de confiabilidade da probabilidade \textit{out-of-fold} de acidente, em faixas delimitadas pelos quantis 50, 70, 80, 90 e 95\%, em escalas logarítmicas; (b) sensibilidade e precisão para acidentes em função do limiar de decisão, com os limiares escolhidos (linhas verticais) para sensibilidade de 80\%}
+    \includegraphics[width=\textwidth]{fig6_limiar_calibracao.png}
+    \caption{(a) Diagrama de confiabilidade da probabilidade \textit{out-of-fold} de acidente, em faixas delimitadas pelos quantis 50, 70, 80, 90 e 95\%, em escalas logarítmicas; (b) sensibilidade e precisão para acidentes em função do limiar de decisão, com os limiares escolhidos (linhas verticais) para sensibilidade de 80\% (RL: Regressão Logística; RF: Random Forest)}
     \label{fig:calibracao}
 \end{figure}
 
@@ -279,9 +282,9 @@ A calibração (Figura~\ref{fig:calibracao}a) separa os dois modelos. A Regress�
 
 Os resultados respondem à pergunta do trabalho com uma qualificação. Os atributos disponíveis na notificação distinguem acidentes do restante com AUC de 0,94 a 0,95, e um modelo ajustado para 80\% de sensibilidade concentra os acidentes em 6,5\% das ocorrências. Mas a severidade de uma ocorrência individual não é nitidamente previsível: nesse ponto de operação, quatro em cada cinco alertas não são acidentes, e o incidente grave, que por definição difere do acidente apenas nas consequências, é a classe mais difícil (AUC de 0,85 a 0,89), porque os atributos descrevem as condições do evento, não o seu desfecho.
 
-Entre os algoritmos, a comparação é mais sutil do que o F1-macro sugere. Os dois ordenam as ocorrências igualmente bem; a vantagem do Random Forest em F1-macro (+0,03) vem do ponto de operação induzido pelo SMOTENC, que troca precisão por sensibilidade, e é acompanhada de probabilidades infladas em duas a quatro vezes. Para uma decisão fixa de classificação, o Random Forest é preferível; para um escore de risco calibrado e interpretável, a Regressão Logística. A validação cruzada repetida mostrou ainda que selecionar e avaliar na mesma partição inflou o F1-macro do Random Forest em 0,026. A descrição do evento, grupo mais informativo na ablação, é em parte uma descrição do desfecho (uma excursão de pista, uma perda de controle); sem ela o modelo ainda supera com folga os baselines (F1-macro de 0,545, AUC de 0,92), mas o desempenho principal depende de a notificação inicial informar corretamente o tipo.
+Entre os algoritmos, a comparação é mais sutil do que o F1-macro sugere. Os dois ordenam as ocorrências igualmente bem; a vantagem do Random Forest em F1-macro (+0,03) vem do ponto de operação induzido pelo SMOTENC, que troca precisão por sensibilidade, e é acompanhada de probabilidades infladas em duas a quatro vezes. Para uma decisão fixa de classificação, o Random Forest é preferível; para um escore de risco calibrado e interpretável, a Regressão Logística. A descrição do evento, grupo mais informativo na ablação, é em parte uma descrição do desfecho (uma excursão de pista, uma perda de controle); sem ela o modelo ainda supera com folga os baselines (F1-macro de 0,545, AUC de 0,92), mas o desempenho principal depende de a notificação inicial informar corretamente o tipo.
 
-A validação temporal traz a limitação mais importante para o uso real: a ordenação transfere-se entre períodos, mas a prevalência de acidentes caiu oito vezes com a mudança de cobertura das notificações em 2023, e limiares ou probabilidades fixados no período anterior passam a emitir alertas em excesso; um sistema operacional precisaria ser recalibrado à prevalência corrente e retreinado periodicamente. Restam limitações que o desenho não resolve: o número de acidentes (91) produz desvios-padrão de 3 pontos percentuais na sensibilidade e torna instáveis as razões de chance de categorias raras; 30\% dos acidentes e dos incidentes graves têm investigação ativa, e a classificação de parte deles pode mudar com o relatório final; e os modelos são discriminativos, sem leitura causal (a região Norte eleva a chance de acidente porque concentra táxi aéreo em aeronaves leves e antigas).
+A validação temporal traz a limitação mais importante para o uso real: a ordenação transfere-se entre períodos, mas a prevalência de acidentes caiu oito vezes com a mudança de cobertura das notificações em 2023, e limiares ou probabilidades fixados no período anterior passam a emitir alertas em excesso; um sistema operacional precisaria ser recalibrado à prevalência corrente e retreinado periodicamente. Restam limitações: o número de acidentes (91) produz desvios-padrão de 3 pontos percentuais na sensibilidade e torna instáveis as razões de chance de categorias raras; 30\% dos acidentes e dos incidentes graves têm investigação ativa, e a classificação de parte deles pode mudar com o relatório final; e os modelos são discriminativos, sem leitura causal (a região Norte eleva a chance de acidente porque concentra táxi aéreo em aeronaves leves e antigas).
 
 \FloatBarrier
 \section{Conclusão}
