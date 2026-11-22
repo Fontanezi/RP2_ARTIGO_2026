@@ -289,7 +289,7 @@ topicos(s, MARGEM + Inches(6.3), TOPO_CONTEUDO + Inches(1.4), LARG_CONTEUDO - In
     ("**Validação cruzada repetida** 10 × 5: média ± desvio-padrão e diferença pareada RF − RL", 1),
     ("**Validação temporal:** treino 2016–2022, teste 2023–2026", 1),
     ("**Limiar de decisão** para sensibilidade ≥ 80% em acidentes", 1),
-    ("**Calibração:** escore de Brier e diagrama de confiabilidade", 1),
+    ("**Calibração:** score de Brier e diagrama de confiabilidade", 1),
 ], tam=14, espaco=6)
 notas(s, "Integrante 2", "0:40", "Percorrer o fluxo. Explicar por que o número principal é a validação cruzada (18 acidentes no teste). Depois os cinco experimentos complementares: cada um responde a uma pergunta deixada pelo relatório parcial.")
 
@@ -401,7 +401,7 @@ topicos(s, MARGEM + Inches(8.5), TOPO_CONTEUDO, LARG_CONTEUDO - Inches(8.5), Inc
     "Teste, mesmos limiares: RL 17/18 acidentes com 73 alertas; RF 15/18 com 78",
 ], tam=13, espaco=7)
 topicos(s, MARGEM, TOPO_CONTEUDO + Inches(3.55), LARG_CONTEUDO, Inches(1.3), [
-    "**Calibração:** RL tem Brier 0,0144 (19% abaixo do previsor constante, 0,0178) e probabilidade média = prevalência (1,8%). RF tem Brier 0,0162 e probabilidade média 4,4%, **2,4× a prevalência**: superestima o risco 2 a 4× em todas as faixas, efeito direto do SMOTENC (treino com 1/3 de acidentes). Como escore de risco, a RL serve sem ajuste; o RF ordena igual, mas precisa de recalibração",
+    "**Calibração:** RL tem Brier 0,0144 (19% abaixo do previsor constante, 0,0178) e probabilidade média = prevalência (1,8%). RF tem Brier 0,0162 e probabilidade média 4,4%, **2,4× a prevalência**: superestima o risco 2 a 4× em todas as faixas, efeito direto do SMOTENC (treino com 1/3 de acidentes). Como score de risco, a RL serve sem ajuste; o RF ordena igual, mas precisa de recalibração",
 ], tam=13, espaco=6)
 legenda(s, "Figura 4. (a) Diagrama de confiabilidade de P(acidente), out-of-fold, escalas logarítmicas; (b) sensibilidade e precisão em função do limiar; RL = Regressão Logística, RF = Random Forest", y=ALT - Inches(0.78))
 notas(s, "Integrante 1 ou 2", "0:40", "Dois resultados operacionais. Limiar: para o mesmo nível de detecção da regra, a Regressão Logística emite metade dos alertas. Calibração: as probabilidades da RL são utilizáveis; as do RF estão infladas 2–4× pelo SMOTENC e precisam de recalibração.")
@@ -410,7 +410,7 @@ notas(s, "Integrante 1 ou 2", "0:40", "Dois resultados operacionais. Limiar: par
 s = novo_slide("Discussão", "Parte 4 · Discussão e conclusão", 18)
 topicos(s, MARGEM, TOPO_CONTEUDO, Inches(6.1), ALT_CONTEUDO, [
     "**Resposta com ressalva:** os atributos da notificação distinguem acidentes com AUC 0,94–0,95 e concentram os acidentes em 6,5% das ocorrências; mas, nesse ponto, 4 em 5 alertas não são acidentes, e o incidente grave é a classe difícil (AUC 0,85–0,89)",
-    "**RF vs. RL é mais sutil que o F1-macro:** mesma ordenação; o RF ganha pelo ponto de operação do SMOTENC e paga com probabilidades infladas. Decisão fixa: RF. Escore de risco calibrado e interpretável: RL",
+    "**RF vs. RL é mais sutil que o F1-macro:** mesma ordenação; o RF ganha pelo ponto de operação do SMOTENC e paga com probabilidades infladas. Decisão fixa: RF. Score de risco calibrado e interpretável: RL",
     "**Tensão na descrição do evento:** é o grupo mais informativo, mas descreve em parte o desfecho; sem ela o modelo ainda bate os baselines (F1-macro 0,545, AUC 0,92)",
 ], tam=15, espaco=10)
 topicos(s, MARGEM + Inches(6.4), TOPO_CONTEUDO, LARG_CONTEUDO - Inches(6.4), ALT_CONTEUDO, [
