@@ -1,7 +1,6 @@
 """Analise exploratoria da BASE_SIPAER (dados abertos CENIPA, RBAC 121/135) e insercao na Secao 4.
 
 Uso: python eda_sipaer.py <BASE_SIPAER.xlsx> <TRABALHO_RP2.docx> <saida.docx>
-A BASE_SIPAER.xlsx e gerada por construir_base.py. As figuras vao para <pasta da saida>/figuras_secao4/.
 """
 import sys
 from pathlib import Path

@@ -1,13 +1,11 @@
-# -*- coding: utf-8 -*-
-"""Modelagem da BASE_SIPAER: classificacao em tres classes (INCIDENTE, INCIDENTE GRAVE, ACIDENTE).
-
-Uso: python modelos_sipaer.py [BASE_SIPAER.xlsx]
+"""
+Modelagem da BASE_SIPAER: classificacao em tres classes (INCIDENTE, INCIDENTE GRAVE, ACIDENTE).
 
 Etapas:
- 1. Ablacao de calendario (mes, dia da semana, hora) com os balanceamentos do relatorio parcial; o conjunto
+ 1. Ablacao de calendario (mes, dia da semana, hora) com os balanceamentos do relatorio parcial, o conjunto
     reduzido e adotado se o F1-macro medio da validacao cruzada nao cair mais de TOLERANCIA em nenhum modelo.
  2. Comparacao de quatro estrategias de balanceamento (nenhum, pesos, SMOTENC, ambos) no conjunto final,
-    para Regressao Logistica multinomial e Random Forest; busca em grade por validacao cruzada estratificada
+    para Regressao Logistica multinomial e Random Forest, busca em grade por validacao cruzada estratificada
     (k = 5) no treino (particao 80/20), maximizando F1-macro.
  3. Ablacao de atributos com o balanceamento selecionado: completo, sem calendario, sem descricao do evento
     (categoria do tipo, saida de pista, numero de tipos) e com codificacao pelo alvo de aerodromo e tipo detalhado.
@@ -42,7 +40,7 @@ from sklearn.metrics import (average_precision_score, balanced_accuracy_score, b
 from sklearn.model_selection import GridSearchCV, StratifiedKFold, cross_val_predict, train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, TargetEncoder
 
-# numpy 2.0 + BLAS Accelerate (macOS) emite avisos espurios em matmul; resultados conferidos contra einsum.
+# numpy 2.0 + BLAS Accelerate (macOS) emite avisos em matmul, resultados conferidos contra einsum.
 warnings.filterwarnings("ignore", message=".*encountered in matmul")
 
 BASE = Path(sys.argv[1] if len(sys.argv) > 1 else "BASE_SIPAER.xlsx")
@@ -362,7 +360,7 @@ def pm(k, m, pct=True, casas=3):
     return f"{pc(s['media'])} $\\pm$ {pc(s['dp'])}" if pct else f"{pt(s['media'], casas)} $\\pm$ {pt(s['dp'], casas)}"
 
 
-# Tabela: balanceamento (conjunto final); "ambos" e identico a "smote" (pesos unitarios apos o SMOTENC) e fica fora da tabela
+# Tabela: balanceamento (conjunto final), "ambos" e identico a "smote" (pesos unitarios apos o SMOTENC) e fica fora da tabela
 for m in ["LR", "RF"]:
     a, s_ = resultados["balanceamento"][f"{m}|ambos"], resultados["balanceamento"][f"{m}|smote"]
     assert abs(a["cv_media"] - s_["cv_media"]) < 1e-9 and a["oof"]["matriz"] == s_["oof"]["matriz"], f"ambos != smote para {m}"
